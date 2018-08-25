@@ -171,9 +171,9 @@ public final class Triangle {
     }
 
     private void checkAcuteProperties() throws NotATriangleException {
-        if (FloatingPointUtil.compareDoubleValueWithThreshold(angleA, 90.0) == -1
-                && FloatingPointUtil.compareDoubleValueWithThreshold(angleB, 90.0) == -1
-                && FloatingPointUtil.compareDoubleValueWithThreshold(angleC, 90.0) == -1) {
+        if (FloatingPointUtil.compareDoubleValueWithThreshold(angleA, 90.0D) == -1
+                && FloatingPointUtil.compareDoubleValueWithThreshold(angleB, 90.0D) == -1
+                && FloatingPointUtil.compareDoubleValueWithThreshold(angleC, 90.0D) == -1) {
 
             if (!isAcute()) {
                 throw new NotATriangleException("All angles less than 90 degrees but not showing acute.");
@@ -194,9 +194,9 @@ public final class Triangle {
     }
 
     private void checkObtuseProperties() throws NotATriangleException {
-        if (FloatingPointUtil.compareDoubleValueWithThreshold(angleA, 90.0) == 1
-                || FloatingPointUtil.compareDoubleValueWithThreshold(angleB, 90.0) == 1
-                || FloatingPointUtil.compareDoubleValueWithThreshold(angleC, 90.0) == 1) {
+        if (FloatingPointUtil.compareDoubleValueWithThreshold(angleA, 90.0D) == 1
+                || FloatingPointUtil.compareDoubleValueWithThreshold(angleB, 90.0D) == 1
+                || FloatingPointUtil.compareDoubleValueWithThreshold(angleC, 90.0D) == 1) {
 
             if (!isObtuse()) {
                 throw new NotATriangleException("One angle over 90 degrees but not showing obtuse.");
@@ -217,9 +217,9 @@ public final class Triangle {
     }
 
     private void checkRightProperties() throws NotATriangleException {
-        if (FloatingPointUtil.compareDoubleValueWithThreshold(angleA, 90.0) == 0
-                || FloatingPointUtil.compareDoubleValueWithThreshold(angleB, 90.0) == 0
-                || FloatingPointUtil.compareDoubleValueWithThreshold(angleC, 90.0) == 0) {
+        if (FloatingPointUtil.compareDoubleValueWithThreshold(angleA, 90.0D) == 0
+                || FloatingPointUtil.compareDoubleValueWithThreshold(angleB, 90.0D) == 0
+                || FloatingPointUtil.compareDoubleValueWithThreshold(angleC, 90.0D) == 0) {
 
             if (!isRight()) {
                 throw new NotATriangleException("One angle 90 degrees but not showing right.");
@@ -244,9 +244,9 @@ public final class Triangle {
     }
 
     private void checkObliqueProperties() throws NotATriangleException {
-        if (FloatingPointUtil.compareDoubleValueWithThreshold(angleA, 90.0) != 0
-                && FloatingPointUtil.compareDoubleValueWithThreshold(angleB, 90.0) != 0
-                && FloatingPointUtil.compareDoubleValueWithThreshold(angleC, 90.0) != 0) {
+        if (FloatingPointUtil.compareDoubleValueWithThreshold(angleA, 90.0D) != 0
+                && FloatingPointUtil.compareDoubleValueWithThreshold(angleB, 90.0D) != 0
+                && FloatingPointUtil.compareDoubleValueWithThreshold(angleC, 90.0D) != 0) {
 
             if (!isOblique()) {
                 throw new NotATriangleException("No right angle but not showing oblique.");
@@ -313,6 +313,15 @@ public final class Triangle {
 
     public double getAngleC() {
         return angleC;
+    }
+
+    // using Heron's formula
+    public double getArea() {
+        double a = getSideA();
+        double b = getSideB();
+        double c = getSideC();
+
+        return (0.25D * Math.sqrt((a + b + c) * (-a + b + c) * (a - b + c) * (a + b - c)));
     }
 
     @Override

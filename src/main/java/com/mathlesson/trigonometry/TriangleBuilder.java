@@ -136,9 +136,9 @@ final class TriangleBuilder {
     }
 
     private void checkForRightAndOblique() {
-        if (FloatingPointUtil.compareDoubleValueWithThreshold(angleA, 90.0) == 0
-                || FloatingPointUtil.compareDoubleValueWithThreshold(angleB, 90.0) == 0
-                || FloatingPointUtil.compareDoubleValueWithThreshold(angleC, 90.0) == 0) {
+        if (FloatingPointUtil.compareDoubleValueWithThreshold(angleA, 90.0D) == 0
+                || FloatingPointUtil.compareDoubleValueWithThreshold(angleB, 90.0D) == 0
+                || FloatingPointUtil.compareDoubleValueWithThreshold(angleC, 90.0D) == 0) {
             properties.add(RIGHT);
         } else {
             properties.add(OBLIQUE);
@@ -169,17 +169,17 @@ final class TriangleBuilder {
     }
 
     private void checkForAcute() {
-        if (FloatingPointUtil.compareDoubleValueWithThreshold(angleA, 90.0) == -1
-                && FloatingPointUtil.compareDoubleValueWithThreshold(angleB, 90.0) == -1
-                && FloatingPointUtil.compareDoubleValueWithThreshold(angleC, 90.0) == -1) {
+        if (FloatingPointUtil.compareDoubleValueWithThreshold(angleA, 90.0D) == -1
+                && FloatingPointUtil.compareDoubleValueWithThreshold(angleB, 90.0D) == -1
+                && FloatingPointUtil.compareDoubleValueWithThreshold(angleC, 90.0D) == -1) {
             properties.add(ACUTE);
         }
     }
 
     private void checkForObtuse() {
-        if (FloatingPointUtil.compareDoubleValueWithThreshold(angleA, 90.0) == 1
-                || FloatingPointUtil.compareDoubleValueWithThreshold(angleB, 90.0) == 1
-                || FloatingPointUtil.compareDoubleValueWithThreshold(angleC, 90.0) == 1) {
+        if (FloatingPointUtil.compareDoubleValueWithThreshold(angleA, 90.0D) == 1
+                || FloatingPointUtil.compareDoubleValueWithThreshold(angleB, 90.0D) == 1
+                || FloatingPointUtil.compareDoubleValueWithThreshold(angleC, 90.0D) == 1) {
             properties.add(OBTUSE);
         }
     }

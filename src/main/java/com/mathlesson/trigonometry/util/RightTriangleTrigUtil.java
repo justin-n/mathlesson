@@ -17,7 +17,7 @@ public class RightTriangleTrigUtil {
     }
 
     public static double getThirdSideByPythagoreanTheorem(double hypLength, double otherSideLength) {
-        return ( Math.sqrt( Math.pow(hypLength, 2.0) - Math.pow(otherSideLength, 2.0) ) );
+        return ( Math.sqrt( Math.pow(hypLength, 2.0D) - Math.pow(otherSideLength, 2.0D) ) );
     }
 
     public static double getAngleDegreesByOppositeAndHypotenuse(double oppLength, double hypLength) {

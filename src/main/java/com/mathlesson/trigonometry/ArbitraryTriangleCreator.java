@@ -48,4 +48,13 @@ public final class ArbitraryTriangleCreator {
                 .angleB(tb -> getThirdAngleBySumOfAnglesOfATriangle(angleC, tb.getAngleA()))
                 .build();
     }
+
+    /*
+
+    This is not going to be an easy one to write up.
+
+    public static Triangle withTwoSidesAndCounterClockwiseAngleAcute(double angleA, double sideB, double sideA);
+
+     */
+
 }
