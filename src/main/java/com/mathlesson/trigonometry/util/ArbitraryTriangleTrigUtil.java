@@ -44,9 +44,10 @@ public final class ArbitraryTriangleTrigUtil {
                     - (2 * sideOne * sideTwo * Math.cos(Math.toRadians(angDegrees)))));
     }
 
-    public static double getOtherNonSeparatingAngleFromTwoSidesAndCounterClockwiseAngle(
-            double sideA, double sideB, double angleA) {
+    public static double getOtherNonSeparatingAngleFromTwoSidesAndNonSeparatingAngle(
+            double oppositeSideLength, double adjacentSideLength, double angleDegrees) {
 
-        return Math.toDegrees(Math.asin((sideB / sideA) * Math.sin(Math.toRadians(angleA))));
+        return Math.toDegrees(
+                Math.asin((adjacentSideLength / oppositeSideLength) * Math.sin(Math.toRadians(angleDegrees))));
     }
 }

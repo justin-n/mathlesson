@@ -109,6 +109,17 @@ final class TriangleBuilder {
         return this;
     }
 
+    TriangleBuilder print() {
+        System.out.println("sideA: " + sideA);
+        System.out.println("sideB: " + sideB);
+        System.out.println("sideC: " + sideC);
+        System.out.println("angleA: " + angleA);
+        System.out.println("angleB: " + angleB);
+        System.out.println("angleC: " + angleC);
+
+        return this;
+    }
+
     Triangle build() {
 
         checkAndAddProperties();

@@ -41,53 +41,84 @@ public final class ArbitraryTriangleCreator {
 
     public static Triangle withTwoSidesAndSeparatingAngle(double sideA, double sideB, double angleC) {
         return new TriangleBuilder()
-                .sideA(sideA)
-                .angleC(angleC)
-                .sideB(sideB)
-                .sideC(
-                    tb -> getThirdSideFromTwoSidesAndSeparatingAngle(sideA, sideB, tb.getAngleC()))
-                .angleA(tb -> getAngleDegreesFromThreeSides(tb.getSideC(), sideB, sideA))
-                .angleB(tb -> getThirdAngleBySumOfAnglesOfATriangle(angleC, tb.getAngleA()))
-                .build();
+            .sideA(sideA)
+            .angleC(angleC)
+            .sideB(sideB)
+            .sideC(tb -> getThirdSideFromTwoSidesAndSeparatingAngle(sideA, sideB, tb.getAngleC()))
+            .angleA(tb -> getAngleDegreesFromThreeSides(tb.getSideC(), sideB, sideA))
+            .angleB(tb -> getThirdAngleBySumOfAnglesOfATriangle(angleC, tb.getAngleA()))
+            .build();
     }
 
-    public static Triangle withTwoSidesAndClockwiseAngleAcute(
+    public static Triangle withTwoSidesAndClockwiseAngle(
             double sideA, double sideB, double angleA) throws TriangleNotSolvableException {
 
         // this validation might eventually be moved to a higher level
-        validateInputForTwoSidesAndNonIncludingAngleSolution(sideA, sideB, angleA);
+        validateInputForTwoSidesAndNonSeparatingAngleSolution(sideA, sideB, angleA);
 
         return new TriangleBuilder()
-                .angleA(angleA)
-                .sideA(sideA)
-                .sideB(sideB)
-                .angleB(
-                    tb ->
-                        getOtherNonSeparatingAngleFromTwoSidesAndCounterClockwiseAngle(sideA, sideB, angleA))
-                .angleC(tb -> getThirdAngleBySumOfAnglesOfATriangle(angleA, tb.getAngleB()))
-                .sideC(tb -> getThirdSideFromTwoSidesAndSeparatingAngle(sideA, sideB, tb.getAngleC()))
-                .build();
+            .angleA(angleA)
+            .sideA(sideA)
+            .sideB(sideB)
+            .angleB(
+                tb -> getOtherNonSeparatingAngleFromTwoSidesAndNonSeparatingAngle(sideA, sideB, angleA))
+            .angleC(tb -> getThirdAngleBySumOfAnglesOfATriangle(angleA, tb.getAngleB()))
+            .sideC(tb -> getThirdSideFromTwoSidesAndSeparatingAngle(sideA, sideB, tb.getAngleC()))
+            .build();
     }
 
-    public static Triangle withTwoSidesAndClockwiseAngleObtuse(
+    public static Triangle withTwoSidesAndClockwiseAngleAlternative(
             double sideA, double sideB, double angleA) throws TriangleNotSolvableException {
 
         // this validation might eventually be moved to a higher level
-        validateInputForTwoSidesAndNonIncludingAngleSolution(sideA, sideB, angleA);
+        validateInputForTwoSidesAndNonSeparatingAngleSolution(sideA, sideB, angleA);
 
         return new TriangleBuilder()
-                .angleA(angleA)
-                .sideA(sideA)
-                .sideB(sideB)
-                .angleB(
-                    tb ->
-                        180 - getOtherNonSeparatingAngleFromTwoSidesAndCounterClockwiseAngle(sideA, sideB, angleA))
-                .angleC(tb -> getThirdAngleBySumOfAnglesOfATriangle(angleA, tb.getAngleB()))
-                .sideC(tb -> getThirdSideFromTwoSidesAndSeparatingAngle(sideA, sideB, tb.getAngleC()))
-                .build();
+            .angleA(angleA)
+            .sideA(sideA)
+            .sideB(sideB)
+            .angleB(
+                tb -> 180 - getOtherNonSeparatingAngleFromTwoSidesAndNonSeparatingAngle(sideA, sideB, angleA))
+            .angleC(tb -> getThirdAngleBySumOfAnglesOfATriangle(angleA, tb.getAngleB()))
+            .sideC(tb -> getThirdSideFromTwoSidesAndSeparatingAngle(sideA, sideB, tb.getAngleC()))
+            .build();
     }
 
-    private static void validateInputForTwoSidesAndNonIncludingAngleSolution(
+    public static Triangle withTwoSidesAndCounterClockwiseAngle(
+            double sideA, double sideB, double angleB) throws TriangleNotSolvableException {
+
+        // this validation might eventually be moved to a higher level
+        validateInputForTwoSidesAndNonSeparatingAngleSolution(sideB, sideA, angleB);
+
+        return new TriangleBuilder()
+            .sideB(sideB)
+            .sideA(sideA)
+            .angleB(angleB)
+            .angleA(
+                tb -> getOtherNonSeparatingAngleFromTwoSidesAndNonSeparatingAngle(sideB, sideA, angleB))
+            .angleC(tb -> getThirdAngleBySumOfAnglesOfATriangle(angleB, tb.getAngleA()))
+            .sideC(tb -> getThirdSideFromTwoSidesAndSeparatingAngle(sideA, sideB, tb.getAngleC()))
+            .build();
+    }
+
+    public static Triangle withTwoSidesAndCounterClockwiseAngleAlternative(
+            double sideA, double sideB, double angleB) throws TriangleNotSolvableException {
+
+        // this validation might eventually be moved to a higher level
+        validateInputForTwoSidesAndNonSeparatingAngleSolution(sideB, sideA, angleB);
+
+        return new TriangleBuilder()
+            .sideB(sideB)
+            .sideA(sideA)
+            .angleB(angleB)
+            .angleA(
+                tb -> 180 - getOtherNonSeparatingAngleFromTwoSidesAndNonSeparatingAngle(sideB, sideA, angleB))
+            .angleC(tb -> getThirdAngleBySumOfAnglesOfATriangle(angleB, tb.getAngleA()))
+            .sideC(tb -> getThirdSideFromTwoSidesAndSeparatingAngle(sideA, sideB, tb.getAngleC()))
+            .build();
+    }
+
+    private static void validateInputForTwoSidesAndNonSeparatingAngleSolution(
             double oppositeSideLength, double adjacentSideLength, double angleDegrees)
             throws TriangleNotSolvableException {
 
