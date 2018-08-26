@@ -340,7 +340,8 @@ public final class Triangle {
             .append("sideC: ").append(sideC).append("\n")
             .append("angleA: ").append(angleA).append("\n")
             .append("angleB: ").append(angleB).append("\n")
-            .append("angleC: ").append(angleC).append("\n");
+            .append("angleC: ").append(angleC).append("\n")
+            .append("area: ").append(getArea()).append("\n");
 
         return sb.toString();
     }

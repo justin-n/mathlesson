@@ -1,5 +1,25 @@
 package com.mathlesson.trigonometry.util;
 
+/**
+ * Follows this triangle model for some methods:
+ *
+ *
+ *                        / \
+ *                      /    \
+ *                    /   B   \
+ *                  /          \
+ *                /             \
+ *          c   /                \   a
+ *            /                   \
+ *          /                      \
+ *        /                         \
+ *      /                            \
+ *    /   A                       C   \
+ *  /__________________________________\
+ *
+ *                   b
+ *
+ */
 public final class ArbitraryTriangleTrigUtil {
 
     private ArbitraryTriangleTrigUtil() { }
@@ -22,5 +42,11 @@ public final class ArbitraryTriangleTrigUtil {
         return Math.sqrt(
             (Math.pow(sideOne, 2.0D) + Math.pow(sideTwo, 2.0D)
                     - (2 * sideOne * sideTwo * Math.cos(Math.toRadians(angDegrees)))));
+    }
+
+    public static double getOtherNonSeparatingAngleFromTwoSidesAndCounterClockwiseAngle(
+            double sideA, double sideB, double angleA) {
+
+        return Math.toDegrees(Math.asin((sideB / sideA) * Math.sin(Math.toRadians(angleA))));
     }
 }

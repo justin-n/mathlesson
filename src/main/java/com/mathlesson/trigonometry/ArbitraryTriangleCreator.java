@@ -49,12 +49,30 @@ public final class ArbitraryTriangleCreator {
                 .build();
     }
 
-    /*
+    public static Triangle withTwoSidesAndCounterClockwiseAngleAcute(double sideA, double sideB, double angleA) {
+        return new TriangleBuilder()
+                .angleA(angleA)
+                .sideA(sideA)
+                .sideB(sideB)
+                .angleB(
+                    tb ->
+                        getOtherNonSeparatingAngleFromTwoSidesAndCounterClockwiseAngle(sideA, sideB, angleA))
+                .angleC(tb -> getThirdAngleBySumOfAnglesOfATriangle(angleA, tb.getAngleB()))
+                .sideC(tb -> getThirdSideFromTwoSidesAndSeparatingAngle(sideA, sideB, tb.getAngleC()))
+                .build();
+    }
 
-    This is not going to be an easy one to write up.
-
-    public static Triangle withTwoSidesAndCounterClockwiseAngleAcute(double angleA, double sideB, double sideA);
-
-     */
+    public static Triangle withTwoSidesAndCounterClockwiseAngleObtuse(double sideA, double sideB, double angleA) {
+        return new TriangleBuilder()
+                .angleA(angleA)
+                .sideA(sideA)
+                .sideB(sideB)
+                .angleB(
+                    tb ->
+                        180 - getOtherNonSeparatingAngleFromTwoSidesAndCounterClockwiseAngle(sideA, sideB, angleA))
+                .angleC(tb -> getThirdAngleBySumOfAnglesOfATriangle(angleA, tb.getAngleB()))
+                .sideC(tb -> getThirdSideFromTwoSidesAndSeparatingAngle(sideA, sideB, tb.getAngleC()))
+                .build();
+    }
 
 }

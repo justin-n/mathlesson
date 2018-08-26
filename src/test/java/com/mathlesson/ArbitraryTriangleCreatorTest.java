@@ -27,6 +27,14 @@ class ArbitraryTriangleCreatorTest {
         rightTriangleTest(arbTriangle1);
     }
 
+    @Test
+    void withTwoSidesAndCounterClockwiseAngleAcuteReturnsValidTriangle() {
+        arbTriangle1 = ArbitraryTriangleCreator
+                .withTwoSidesAndCounterClockwiseAngleAcute(3.0D, 5.196152422706633D, 30.0D);
+
+        rightTriangleTest(arbTriangle1);
+    }
+
     private void rightTriangleTest(Triangle triangle) {
         assertEquals(triangle.getSideA(), 3.0D, 0.000001D);
         assertEquals(triangle.getSideB(), 5.196152422706633D, 0.000001D);
