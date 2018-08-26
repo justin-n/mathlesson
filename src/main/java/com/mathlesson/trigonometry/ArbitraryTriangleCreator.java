@@ -1,5 +1,7 @@
 package com.mathlesson.trigonometry;
 
+import com.mathlesson.util.FloatingPointUtil;
+
 import static com.mathlesson.trigonometry.util.ArbitraryTriangleTrigUtil.*;
 
 /**
@@ -49,7 +51,12 @@ public final class ArbitraryTriangleCreator {
                 .build();
     }
 
-    public static Triangle withTwoSidesAndCounterClockwiseAngleAcute(double sideA, double sideB, double angleA) {
+    public static Triangle withTwoSidesAndClockwiseAngleAcute(
+            double sideA, double sideB, double angleA) throws TriangleNotSolvableException {
+
+        // this validation might eventually be moved to a higher level
+        validateInputForTwoSidesAndNonIncludingAngleSolution(sideA, sideB, angleA);
+
         return new TriangleBuilder()
                 .angleA(angleA)
                 .sideA(sideA)
@@ -62,7 +69,12 @@ public final class ArbitraryTriangleCreator {
                 .build();
     }
 
-    public static Triangle withTwoSidesAndCounterClockwiseAngleObtuse(double sideA, double sideB, double angleA) {
+    public static Triangle withTwoSidesAndClockwiseAngleObtuse(
+            double sideA, double sideB, double angleA) throws TriangleNotSolvableException {
+
+        // this validation might eventually be moved to a higher level
+        validateInputForTwoSidesAndNonIncludingAngleSolution(sideA, sideB, angleA);
+
         return new TriangleBuilder()
                 .angleA(angleA)
                 .sideA(sideA)
@@ -75,4 +87,18 @@ public final class ArbitraryTriangleCreator {
                 .build();
     }
 
+    private static void validateInputForTwoSidesAndNonIncludingAngleSolution(
+            double oppositeSideLength, double adjacentSideLength, double angleDegrees)
+            throws TriangleNotSolvableException {
+
+        if (((FloatingPointUtil.compareDoubleValueWithThreshold(oppositeSideLength, adjacentSideLength) != 1))
+                && (FloatingPointUtil.compareDoubleValueWithThreshold(angleDegrees, 90.0D) != -1)) {
+
+            throw new TriangleNotSolvableException("opposite side of angle cannot reach third side");
+        }
+        if (FloatingPointUtil.compareDoubleValueWithThreshold(
+                (adjacentSideLength / oppositeSideLength) * (Math.sin(Math.toRadians(angleDegrees))), 1.0D) == 1) {
+            throw new TriangleNotSolvableException("law of sines check failed");
+        }
+    }
 }
