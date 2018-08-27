@@ -78,7 +78,7 @@ public final class ArbitraryTriangleCreator {
             .sideA(sideA)
             .sideB(sideB)
             .angleB(
-                tb -> 180 - getOtherNonSeparatingAngleFromTwoSidesAndNonSeparatingAngle(sideA, sideB, angleA))
+                tb -> 180.0D - getOtherNonSeparatingAngleFromTwoSidesAndNonSeparatingAngle(sideA, sideB, angleA))
             .angleC(tb -> getThirdAngleBySumOfAnglesOfATriangle(angleA, tb.getAngleB()))
             .sideC(tb -> getThirdSideFromTwoSidesAndSeparatingAngle(sideA, sideB, tb.getAngleC()))
             .build();
@@ -112,7 +112,7 @@ public final class ArbitraryTriangleCreator {
             .sideA(sideA)
             .angleB(angleB)
             .angleA(
-                tb -> 180 - getOtherNonSeparatingAngleFromTwoSidesAndNonSeparatingAngle(sideB, sideA, angleB))
+                tb -> 180.0D - getOtherNonSeparatingAngleFromTwoSidesAndNonSeparatingAngle(sideB, sideA, angleB))
             .angleC(tb -> getThirdAngleBySumOfAnglesOfATriangle(angleB, tb.getAngleA()))
             .sideC(tb -> getThirdSideFromTwoSidesAndSeparatingAngle(sideA, sideB, tb.getAngleC()))
             .build();
