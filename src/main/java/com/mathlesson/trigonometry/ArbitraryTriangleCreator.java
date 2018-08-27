@@ -118,6 +118,20 @@ public final class ArbitraryTriangleCreator {
             .build();
     }
 
+    public static Triangle withTwoAnglesAndOneCounterClockwiseSide(
+            double angleA, double angleB, double sideB) {
+
+        return new TriangleBuilder()
+            .angleB(angleB)
+            .angleA(angleA)
+            .sideB(sideB)
+            .sideA(
+                tb -> getOtherNonSeparatingSideFromTwoAnglesAndNonSeparatingSide(angleB, angleA, sideB))
+            .angleC(tb -> getThirdAngleBySumOfAnglesOfATriangle(angleA, angleB))
+            .sideC(tb -> getThirdSideFromTwoSidesAndSeparatingAngle(tb.getSideA(), tb.getSideB(), tb.getAngleC()))
+            .build();
+    }
+
     private static void validateInputForTwoSidesAndNonSeparatingAngleSolution(
             double oppositeSideLength, double adjacentSideLength, double angleDegrees)
             throws TriangleNotSolvableException {

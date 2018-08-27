@@ -50,4 +50,12 @@ public final class ArbitraryTriangleTrigUtil {
         return Math.toDegrees(
                 Math.asin((adjacentSideLength / oppositeSideLength) * Math.sin(Math.toRadians(angleDegrees))));
     }
+
+    public static double getOtherNonSeparatingSideFromTwoAnglesAndNonSeparatingSide(
+            double oppositeAngleDegrees, double adjacentAngleDegrees, double sideLength) {
+
+        // (sine(adjacentAngleDegrees) * (sideLength / sine(oppositeAngleDegrees))
+        return (Math.sin(Math.toRadians(adjacentAngleDegrees))
+            * (sideLength / Math.sin(Math.toRadians(oppositeAngleDegrees))));
+    }
 }
