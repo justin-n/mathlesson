@@ -118,7 +118,7 @@ public final class ArbitraryTriangleCreator {
             .build();
     }
 
-    public static Triangle withTwoAnglesAndOneCounterClockwiseSide(
+    public static Triangle withTwoAnglesAndCounterClockwiseSide(
             double angleA, double angleB, double sideB) {
 
         return new TriangleBuilder()
