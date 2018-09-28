@@ -40,4 +40,14 @@ public final class ArbitraryTriangleTrigUtil {
         return (sin(toRadians(adjacentAngleDegrees))
             * (sideLength / sin(toRadians(oppositeAngleDegrees))));
     }
+
+    public static double getOtherSideFromTwoAnglesAndSeparatingSide(
+            double oppositeAngleDegrees, double adjacentAngleDegrees, double sideLength) {
+
+        // using the law of sines
+        return (sideLength
+            * (sin(toRadians(oppositeAngleDegrees))
+                / (sin(toRadians(oppositeAngleDegrees)) * cos(toRadians(adjacentAngleDegrees))
+                    + (sin(toRadians(adjacentAngleDegrees)) * cos(toRadians(oppositeAngleDegrees))))));
+    }
 }

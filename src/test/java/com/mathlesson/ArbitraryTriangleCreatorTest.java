@@ -89,6 +89,17 @@ class ArbitraryTriangleCreatorTest {
         arbitraryTriangleTest1(arbTriangle2);
     }
 
+    @Test
+    void withTwoAnglesAndSeparatingSideReturnsValidTriangle() {
+        arbTriangle1 = ArbitraryTriangleCreator
+            .withTwoAnglesAndSeparatingSide(30.0D, 5.196152422706633D, 90.0D);
+        arbTriangle2 = ArbitraryTriangleCreator
+            .withTwoAnglesAndSeparatingSide(50.0D, 10.0D, 60.0D);
+
+        rightTriangleTest1(arbTriangle1);
+        arbitraryTriangleTest1(arbTriangle2);
+    }
+
     private void rightTriangleTest1(Triangle triangle) {
         assertEquals(3.0D, triangle.getSideA(), TEST_DELTA);
         assertEquals(5.196152422706633D, triangle.getSideB(), TEST_DELTA);
