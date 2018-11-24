@@ -1,14 +1,16 @@
 package com.mathlesson.matrices;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
-public class InteractiveMatrixBuilderAndOperator {
+public class InteractiveMatrixDirector {
 
     private static final String CURSOR = ">> ";
 
-    public static void runInterpreter() {
+    public static void runInterpreter() throws IOException {
 
-        Scanner scanner = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println("No matrices exist. You can add up to two.");
         System.out.println("Choices:");
@@ -18,17 +20,23 @@ public class InteractiveMatrixBuilderAndOperator {
         System.out.println();
         System.out.print(CURSOR);
 
-        int choice = scanner.nextInt();
+        String choiceLine = br.readLine();
 
-        if (choice == 1) {
+        int choice = Integer.parseInt(choiceLine);
+
+        if (choice == 1 || choice == 2) {
 
             BinaryMatrixOperationEquationHandler<Integer>
                 bmoeh = new BinaryMatrixOperationEquationHandler<>();
 
-            System.out.println("Add the first comma-separated row.");
+            System.out.println("Add a comma-separated row.");
             System.out.println("Subsequent rows must be the same length.");
             System.out.println();
-            System.out.println(CURSOR);
+            System.out.print(CURSOR);
+
+            String commaSeparatedRow = br.readLine();
+
+            System.out.println(commaSeparatedRow);
 
         }
     }
