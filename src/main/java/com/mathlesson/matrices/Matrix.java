@@ -6,6 +6,8 @@ public class Matrix<N extends Number> {
 
     private List<N> rows;
 
+    public Matrix() { }
+
     public Matrix(List<N> rows) {
         this.rows = rows;
     }
