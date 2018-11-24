@@ -1,6 +1,6 @@
 package com.mathlesson.trigonometry;
 
-public class NotATriangleException extends Exception {
+public class NotATriangleException extends RuntimeException {
 
     public NotATriangleException() {
         super();

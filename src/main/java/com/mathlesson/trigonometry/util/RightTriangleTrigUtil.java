@@ -2,7 +2,7 @@ package com.mathlesson.trigonometry.util;
 
 import static java.lang.Math.*;
 
-public class RightTriangleTrigUtil {
+public final class RightTriangleTrigUtil {
 
     private RightTriangleTrigUtil() { }
 

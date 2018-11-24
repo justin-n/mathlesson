@@ -1,6 +1,6 @@
 package com.mathlesson.trigonometry;
 
-public class TriangleNotSolvableException extends Exception {
+public class TriangleNotSolvableException extends RuntimeException {
 
     public TriangleNotSolvableException() {
         super();
