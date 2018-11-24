@@ -1,5 +1,7 @@
 package com.mathlesson.matrices;
 
+import com.mathlesson.util.InputValidationUtil;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -22,6 +24,12 @@ public class InteractiveMatrixDirector {
 
         String choiceLine = br.readLine();
 
+        while (!validateMenuChoiceInput(choiceLine)) {
+            System.out.println();
+            System.out.print(CURSOR);
+            choiceLine = br.readLine();
+        }
+
         int choice = Integer.parseInt(choiceLine);
 
         if (choice == 1 || choice == 2) {
@@ -39,5 +47,32 @@ public class InteractiveMatrixDirector {
             System.out.println(commaSeparatedRow);
 
         }
+    }
+
+    private static boolean validateMenuChoiceInput(String input) {
+
+        if (InputValidationUtil.stringContainsSpaces(input)) {
+            System.out.println("Please exclude spaces in menu selection");
+            return false;
+        }
+
+        if (!InputValidationUtil.stringContainsOnlyNumbers(input)) {
+            System.out.println("Please only include numbers in menu selection");
+            return false;
+        }
+
+        return true;
+    }
+
+    private static boolean validateCommaSeparatedRowInput(String input) {
+
+        String inputWithoutWhitespace = input.replaceAll("\\s", "");
+
+        if (!InputValidationUtil.stringContainsOnlyNumbersAndCommas(inputWithoutWhitespace)) {
+            System.out.println("Please only include numbers and commas");
+            return false;
+        }
+
+        return true;
     }
 }
