@@ -1,4 +1,4 @@
-package com.mathlesson.trigonometry;
+package com.mathlesson;
 
 public class Application {
     public static void main(String[] args) {
