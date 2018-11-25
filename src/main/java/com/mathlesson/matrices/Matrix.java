@@ -49,7 +49,7 @@ public class Matrix {
 
                     sb.append(getSpacesString(spacesToPrint))
                         .append(row.get(i))
-                        .append(" ]");
+                        .append(" ]\n");
 
                 }
                 else {

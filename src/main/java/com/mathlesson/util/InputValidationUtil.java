@@ -2,13 +2,50 @@ package com.mathlesson.util;
 
 public class InputValidationUtil {
 
+    public static boolean validateMenuChoiceInput(String input) {
+
+        if (InputValidationUtil.stringContainsSpaces(input)) {
+            System.out.println("Please exclude spaces in menu selection");
+            return false;
+        }
+
+        if (!InputValidationUtil.stringContainsOnlyNumbers(input)) {
+            System.out.println("Please only include numbers in menu selection");
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean validateCommaSeparatedRowInput(String input) {
+
+        if (InputValidationUtil.stringContainsSpacesBetweenNumbers(input)) {
+            System.out.println("Please do not include spaces between numbers");
+            return false;
+        }
+
+        String inputWithoutWhitespace = input.replaceAll("\\s", "");
+
+        if (!InputValidationUtil.stringContainsOnlyNumbersAndCommas(inputWithoutWhitespace)) {
+            System.out.println("Please only include numbers and commas");
+            return false;
+        }
+
+        if (InputValidationUtil.stringContainsConsecutiveCommas(input)) {
+            System.out.println("Please do not include consecutive commas");
+            return false;
+        }
+
+        return true;
+    }
+
     public static boolean stringContainsSpaces(String input) {
         return input.split(" ").length > 1;
     }
 
     public static boolean stringContainsOnlyNumbers(String input) {
         for (char c : input.toCharArray()) {
-            if (!charIsANumber(c)) {
+            if (!charIsADigit(c)) {
                 return false;
             }
         }
@@ -17,7 +54,7 @@ public class InputValidationUtil {
 
     public static boolean stringContainsOnlyNumbersAndCommas(String input) {
         for (char c : input.toCharArray()) {
-            if (!charIsANumber(c) && (c != ',')) {
+            if (!charIsADigit(c) && (c != ',')) {
                 return false;
             }
         }
@@ -44,7 +81,7 @@ public class InputValidationUtil {
         char[] inputCharArr = input.toCharArray();
         
         for (int i = 0; i < inputCharArr.length - 3; i++) {
-            if (charIsANumber(inputCharArr[i])) {
+            if (charIsADigit(inputCharArr[i])) {
                 if (inputCharArr[i + 1] == ' ') {
                     int nextIndexToCheck = i + 2;
                     
@@ -54,7 +91,7 @@ public class InputValidationUtil {
                     
                     i = nextIndexToCheck;
                     
-                    if (charIsANumber(inputCharArr[nextIndexToCheck])) {
+                    if (charIsADigit(inputCharArr[nextIndexToCheck])) {
                         return true;
                     }
                 }
@@ -64,7 +101,7 @@ public class InputValidationUtil {
         return false;
     }
 
-    private static boolean charIsANumber(char c) {
+    private static boolean charIsADigit(char c) {
         return (c >= '0' && c <= '9');
     }
 }

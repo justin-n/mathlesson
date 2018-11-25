@@ -17,92 +17,70 @@ public class InteractiveMatrixDirector {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.println("No matrices exist. You can add up to two.");
-        System.out.println("Choices:");
-        System.out.println("\t1. Add first matrix in operation order");
-        System.out.println("\t2. Add second matrix in operation order");
-        System.out.println("\t3. Set Number type of matrices (default is Integer)");
+        BinaryMatrixOperationEquationHandler
+            bmoeh = new BinaryMatrixOperationEquationHandler();
+
+        int mainMenuChoice = 0;
+
+        while (mainMenuChoice != 6) {
+            System.out.println();
+            System.out.println("\t1. Add row to first matrix in operation order");
+            System.out.println("\t2. Add row to second matrix in operation order");
+            System.out.println("\t3. View first matrix in operation order");
+            System.out.println("\t4. View second matrix in operation order");
+            System.out.println("\t5. View both matrix operands");
+            System.out.println("\t6. Exit");
+            System.out.println();
+            System.out.print(CURSOR);
+
+            String mainMenuChoiceLine = br.readLine();
+
+            while (!InputValidationUtil.validateMenuChoiceInput(mainMenuChoiceLine)) {
+                System.out.println();
+                System.out.print(CURSOR);
+                mainMenuChoiceLine = br.readLine();
+            }
+
+            mainMenuChoice = Integer.parseInt(mainMenuChoiceLine);
+
+            if (mainMenuChoice == 1) {
+                addRowToMatrix(br, bmoeh.getFirstMatrix());
+            }
+            else if (mainMenuChoice == 2) {
+                addRowToMatrix(br, bmoeh.getSecondMatrix());
+            }
+            else if (mainMenuChoice == 3) {
+                System.out.println("First matrix in operation order: ");
+                System.out.println(bmoeh.getFirstMatrix());
+            }
+            else if (mainMenuChoice == 4) {
+                System.out.println("Second matrix in operation order: ");
+                System.out.println(bmoeh.getSecondMatrix());
+            }
+        }
+    }
+
+    private static void addRowToMatrix(BufferedReader br, Matrix matrix) throws IOException {
+        System.out.println("Add a comma-separated row.");
+        System.out.println("Subsequent rows must be the same length.");
         System.out.println();
         System.out.print(CURSOR);
 
-        String choiceLine = br.readLine();
+        String commaSeparatedRow = br.readLine();
 
-        while (!validateMenuChoiceInput(choiceLine)) {
+        while (!InputValidationUtil.validateCommaSeparatedRowInput(commaSeparatedRow)) {
             System.out.println();
             System.out.print(CURSOR);
-            choiceLine = br.readLine();
+            commaSeparatedRow = br.readLine();
         }
 
-        int choice = Integer.parseInt(choiceLine);
+        String commaSepRowNoWhiteSpace = commaSeparatedRow.replaceAll("\\s", "");
 
-        if (choice == 1 || choice == 2) {
+        List<Integer> rowInts = Arrays.stream(commaSepRowNoWhiteSpace.split(","))
+            .map(Integer::parseInt)
+            .collect(Collectors.toList());
 
-            BinaryMatrixOperationEquationHandler
-                bmoeh = new BinaryMatrixOperationEquationHandler();
-
-            System.out.println("Add a comma-separated row.");
-            System.out.println("Subsequent rows must be the same length.");
-            System.out.println();
-            System.out.print(CURSOR);
-
-            String commaSeparatedRow = br.readLine();
-
-            while (!validateCommaSeparatedRowInput(commaSeparatedRow)) {
-                System.out.println();
-                System.out.print(CURSOR);
-                commaSeparatedRow = br.readLine();
-            }
-            
-            if (choice == 1) {
-                String commaSepRowNoWhiteSpace = commaSeparatedRow.replaceAll("\\s", "");
-
-                List<Integer> rowInts = Arrays.stream(commaSepRowNoWhiteSpace.split(","))
-                    .map(Integer::parseInt)
-                    .collect(Collectors.toList());
-
-                bmoeh.getFirstMatrix().addRow(rowInts);
-            }
-
-            System.out.println("First Matrix: ");
-            System.out.println(bmoeh.getFirstMatrix());
-
-        }
+        matrix.addRow(rowInts);
     }
 
-    private static boolean validateMenuChoiceInput(String input) {
-
-        if (InputValidationUtil.stringContainsSpaces(input)) {
-            System.out.println("Please exclude spaces in menu selection");
-            return false;
-        }
-
-        if (!InputValidationUtil.stringContainsOnlyNumbers(input)) {
-            System.out.println("Please only include numbers in menu selection");
-            return false;
-        }
-
-        return true;
-    }
-
-    private static boolean validateCommaSeparatedRowInput(String input) {
-
-        if (InputValidationUtil.stringContainsSpacesBetweenNumbers(input)) {
-            System.out.println("Please do not include spaces between numbers");
-            return false;
-        }
-
-        String inputWithoutWhitespace = input.replaceAll("\\s", "");
-
-        if (!InputValidationUtil.stringContainsOnlyNumbersAndCommas(inputWithoutWhitespace)) {
-            System.out.println("Please only include numbers and commas");
-            return false;
-        }
-
-        if (InputValidationUtil.stringContainsConsecutiveCommas(input)) {
-            System.out.println("Please do not include consecutive commas");
-            return false;
-        }
-
-        return true;
-    }
 }
