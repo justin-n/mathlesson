@@ -63,6 +63,9 @@ public class InteractiveMatrixDirector {
                 bmoeh.getFirstMatrix().addRow(rowInts);
             }
 
+            System.out.println("First Matrix: ");
+            System.out.println(bmoeh.getFirstMatrix());
+
         }
     }
 
