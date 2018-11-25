@@ -1,22 +1,25 @@
 package com.mathlesson.matrices;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Matrix<N extends Number> {
+public class Matrix {
 
-    private List<List<N>> rows;
+    private List<List<Integer>> rows;
 
-    public Matrix() { }
-
-    public Matrix(List<List<N>> rows) {
-        this.rows = rows;
+    Matrix() {
+        rows = new ArrayList<>();
     }
 
-    public List<List<N>> getRows() {
+    public List<List<Integer>> getRows() {
         return rows;
     }
 
-    public void setRows(List<List<N>> rows) {
-        this.rows = rows;
+    public List<Integer> getRowByIndex(int index) {
+        return rows.get(index);
+    }
+
+    public void addRow(List<Integer> row) {
+        rows.add(row);
     }
 }

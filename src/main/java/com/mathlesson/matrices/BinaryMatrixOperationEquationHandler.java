@@ -1,36 +1,38 @@
 package com.mathlesson.matrices;
 
-public class BinaryMatrixOperationEquationHandler<N extends Number> {
+public class BinaryMatrixOperationEquationHandler {
 
-    private Matrix<N> firstMatrix;
-    private Matrix<N> secondMatrix;
-    private Matrix<N> resultMatrix;
+    private Matrix firstMatrix;
+    private Matrix secondMatrix;
+    private Matrix resultMatrix;
 
     BinaryMatrixOperationEquationHandler() {
-        firstMatrix = new Matrix<>();
+        firstMatrix = new Matrix();
+        secondMatrix = new Matrix();
+        resultMatrix = new Matrix();
     }
 
-    public Matrix<N> getFirstMatrix() {
+    public Matrix getFirstMatrix() {
         return firstMatrix;
     }
 
-    public void setFirstMatrix(Matrix<N> firstMatrix) {
+    public void setFirstMatrix(Matrix firstMatrix) {
         this.firstMatrix = firstMatrix;
     }
 
-    public Matrix<N> getSecondMatrix() {
+    public Matrix getSecondMatrix() {
         return secondMatrix;
     }
 
-    public void setSecondMatrix(Matrix<N> secondMatrix) {
+    public void setSecondMatrix(Matrix secondMatrix) {
         this.secondMatrix = secondMatrix;
     }
 
-    public Matrix<N> getResultMatrix() {
+    public Matrix getResultMatrix() {
         return resultMatrix;
     }
 
-    public void setResultMatrix(Matrix<N> resultMatrix) {
+    public void setResultMatrix(Matrix resultMatrix) {
         this.resultMatrix = resultMatrix;
     }
 }

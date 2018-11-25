@@ -5,6 +5,9 @@ import com.mathlesson.util.InputValidationUtil;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class InteractiveMatrixDirector {
 
@@ -34,8 +37,8 @@ public class InteractiveMatrixDirector {
 
         if (choice == 1 || choice == 2) {
 
-            BinaryMatrixOperationEquationHandler<Integer>
-                bmoeh = new BinaryMatrixOperationEquationHandler<>();
+            BinaryMatrixOperationEquationHandler
+                bmoeh = new BinaryMatrixOperationEquationHandler();
 
             System.out.println("Add a comma-separated row.");
             System.out.println("Subsequent rows must be the same length.");
@@ -51,6 +54,13 @@ public class InteractiveMatrixDirector {
             }
             
             if (choice == 1) {
+                String commaSepRowNoWhiteSpace = commaSeparatedRow.replaceAll("\\s", "");
+
+                List<Integer> rowInts = Arrays.stream(commaSepRowNoWhiteSpace.split(","))
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+
+                bmoeh.getFirstMatrix().addRow(rowInts);
             }
 
         }
@@ -72,7 +82,7 @@ public class InteractiveMatrixDirector {
     }
 
     private static boolean validateCommaSeparatedRowInput(String input) {
-        
+
         if (InputValidationUtil.stringContainsSpacesBetweenNumbers(input)) {
             System.out.println("Please do not include spaces between numbers");
             return false;
@@ -84,7 +94,7 @@ public class InteractiveMatrixDirector {
             System.out.println("Please only include numbers and commas");
             return false;
         }
-        
+
         if (InputValidationUtil.stringContainsConsecutiveCommas(input)) {
             System.out.println("Please do not include consecutive commas");
             return false;
