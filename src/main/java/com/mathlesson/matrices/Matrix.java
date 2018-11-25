@@ -4,19 +4,19 @@ import java.util.List;
 
 public class Matrix<N extends Number> {
 
-    private List<N> rows;
+    private List<List<N>> rows;
 
     public Matrix() { }
 
-    public Matrix(List<N> rows) {
+    public Matrix(List<List<N>> rows) {
         this.rows = rows;
     }
 
-    public List<N> getRows() {
+    public List<List<N>> getRows() {
         return rows;
     }
 
-    public void setRows(List<N> rows) {
+    public void setRows(List<List<N>> rows) {
         this.rows = rows;
     }
 }

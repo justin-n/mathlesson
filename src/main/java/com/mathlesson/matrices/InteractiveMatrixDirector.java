@@ -44,7 +44,14 @@ public class InteractiveMatrixDirector {
 
             String commaSeparatedRow = br.readLine();
 
-            System.out.println(commaSeparatedRow);
+            while (!validateCommaSeparatedRowInput(commaSeparatedRow)) {
+                System.out.println();
+                System.out.print(CURSOR);
+                commaSeparatedRow = br.readLine();
+            }
+            
+            if (choice == 1) {
+            }
 
         }
     }
@@ -65,11 +72,21 @@ public class InteractiveMatrixDirector {
     }
 
     private static boolean validateCommaSeparatedRowInput(String input) {
+        
+        if (InputValidationUtil.stringContainsSpacesBetweenNumbers(input)) {
+            System.out.println("Please do not include spaces between numbers");
+            return false;
+        }
 
         String inputWithoutWhitespace = input.replaceAll("\\s", "");
 
         if (!InputValidationUtil.stringContainsOnlyNumbersAndCommas(inputWithoutWhitespace)) {
             System.out.println("Please only include numbers and commas");
+            return false;
+        }
+        
+        if (InputValidationUtil.stringContainsConsecutiveCommas(input)) {
+            System.out.println("Please do not include consecutive commas");
             return false;
         }
 
