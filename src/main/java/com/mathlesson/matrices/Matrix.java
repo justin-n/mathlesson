@@ -5,10 +5,20 @@ import java.util.List;
 
 public class Matrix {
 
+    private int width;
+    private int height;
     private List<List<Integer>> rows;
 
     Matrix() {
         rows = new ArrayList<>();
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 
     public List<List<Integer>> getRows() {
@@ -20,44 +30,78 @@ public class Matrix {
     }
 
     public void addRow(List<Integer> row) {
-        rows.add(row);
+        if (rows.size() == 0) {
+            rows.add(row);
+            width = row.size();
+            height = 1;
+        } else {
+            if (row.size() != width) {
+                System.err.println(
+                    "Unable to add row, width of row: " + row.size() + " is not the width of the matrix: " + width);
+                System.out.println();
+            } else {
+                rows.add(row);
+                height++;
+            }
+        }
     }
 
     @Override
     public String toString() {
+
+        if (rows.size() == 0) {
+            return "[ ]\n";
+        }
 
         int numberOfDigitsInLongestNumber = getNumberOfDigitsInLongestNumber();
 
         StringBuilder sb = new StringBuilder();
 
         for (List<Integer> row : rows) {
-            for (int i = 0; i < row.size(); i++) {
 
-                int spacesToPrint
-                    = getNumberOfPaddingSpacesNeeded(
-                    numberOfDigitsInLongestNumber, String.valueOf(row.get(i)).length());
-
-                if (i == 0) {
+            if (width == 1) {
+                for (Integer item : row) {
+                    int spacesToPrint
+                        = getNumberOfPaddingSpacesNeeded(
+                            numberOfDigitsInLongestNumber, String.valueOf(item).length());
 
                     sb.append("[ ")
                         .append(getSpacesString(spacesToPrint))
-                        .append(row.get(i))
-                        .append(", ");
-
-                }
-                else if (i == (row.size() - 1)) {
-
-                    sb.append(getSpacesString(spacesToPrint))
-                        .append(row.get(i))
+                        .append(item)
                         .append(" ]\n");
-
                 }
-                else {
 
-                    sb.append(getSpacesString(spacesToPrint))
-                        .append(row.get(i))
-                        .append(", ");
+            }
+            else {
 
+                for (int i = 0; i < row.size(); i++) {
+
+                    int spacesToPrint
+                        = getNumberOfPaddingSpacesNeeded(
+                        numberOfDigitsInLongestNumber, String.valueOf(row.get(i)).length());
+
+                    if (i == 0) {
+
+                        sb.append("[ ")
+                            .append(getSpacesString(spacesToPrint))
+                            .append(row.get(i))
+                            .append(", ");
+
+                    }
+                    else if (i == (row.size() - 1)) {
+
+                        sb.append(getSpacesString(spacesToPrint))
+                            .append(row.get(i))
+                            .append(" ]\n");
+
+                    }
+                    else {
+
+                        sb.append(getSpacesString(spacesToPrint))
+                            .append(row.get(i))
+                            .append(", ");
+
+                    }
                 }
             }
         }
