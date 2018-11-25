@@ -46,6 +46,59 @@ public class Matrix {
         }
     }
 
+    int getNumberOfDigitsInLongestNumber() {
+
+        int highestNumberOfDigits = 0;
+
+        for (List<Integer> row : rows) {
+            for (Integer item : row) {
+                int numberOfDigits = String.valueOf(item).length();
+
+                if (numberOfDigits > highestNumberOfDigits) {
+                    highestNumberOfDigits = numberOfDigits;
+                }
+            }
+        }
+
+        return highestNumberOfDigits;
+    }
+
+    String getFormattedRowStringByIndex(int rowIndex) {
+        if (rows.size() == 0 && rowIndex == 0) {
+            return "[ ]";
+        }
+        else {
+            StringBuilder sb = new StringBuilder();
+
+            List<Integer> row = rows.get(rowIndex);
+
+            if (row.size() == 1) {
+                sb.append("[ ")
+                    .append(getNumberOfPaddingSpacesNeeded(
+                        getNumberOfDigitsInLongestNumber(), row.get(0)))
+                    .append(" ]");
+            }
+            else {
+                sb.append("[ ");
+
+                for (int columnIndex = 0; columnIndex < row.size(); columnIndex++) {
+                    if (columnIndex == row.size() - 1) {
+                        sb.append(getNumberOfPaddingSpacesNeeded(
+                                getNumberOfDigitsInLongestNumber(), row.get(columnIndex)))
+                            .append(" ]");
+                    }
+                    else {
+                        sb.append(getNumberOfPaddingSpacesNeeded(
+                                getNumberOfDigitsInLongestNumber(), row.get(columnIndex)))
+                            .append(", ");
+                    }
+                }
+            }
+
+            return sb.toString();
+        }
+    }
+
     @Override
     public String toString() {
 
@@ -106,23 +159,6 @@ public class Matrix {
             }
         }
         return sb.toString();
-    }
-
-    private int getNumberOfDigitsInLongestNumber() {
-
-        int highestNumberOfDigits = 0;
-
-        for (List<Integer> row : rows) {
-            for (Integer item : row) {
-                int numberOfDigits = String.valueOf(item).length();
-
-                if (numberOfDigits > highestNumberOfDigits) {
-                    highestNumberOfDigits = numberOfDigits;
-                }
-            }
-        }
-
-        return highestNumberOfDigits;
     }
 
     private int getNumberOfPaddingSpacesNeeded(int numberOfDigitsInLongestNumber, int numberOfDigitsInCurrentNumber) {
