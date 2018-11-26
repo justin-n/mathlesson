@@ -50,7 +50,7 @@ public class Matrix {
         }
     }
 
-    int getNumberOfDigitsInLongestNumber() {
+    private int getNumberOfDigitsInLongestNumber() {
 
         int highestNumberOfDigits = 0;
 
@@ -137,31 +137,33 @@ public class Matrix {
             }
             else {
 
-                for (int i = 0; i < row.size(); i++) {
+                for (int printIndex = 0; printIndex < row.size(); printIndex++) {
 
-                    int spacesToPrint
-                        = StandardOutputUtil.getNumberOfPaddingSpacesNeeded(
-                            numberOfDigitsInLongestNumber, String.valueOf(row.get(i)).length());
-
-                    if (i == 0) {
+                    if (printIndex == 0) {
 
                         sb.append("[ ")
-                            .append(StandardOutputUtil.getSpacesString(spacesToPrint))
-                            .append(row.get(i))
+                            .append(StandardOutputUtil.getLeadingSpaces(
+                                    numberOfDigitsInLongestNumber,
+                                    String.valueOf(row.get(printIndex)).length()))
+                            .append(row.get(printIndex))
                             .append(", ");
 
                     }
-                    else if (i == (row.size() - 1)) {
+                    else if (printIndex == (row.size() - 1)) {
 
-                        sb.append(StandardOutputUtil.getSpacesString(spacesToPrint))
-                            .append(row.get(i))
+                        sb.append(StandardOutputUtil.getLeadingSpaces(
+                                    numberOfDigitsInLongestNumber,
+                                    String.valueOf(row.get(printIndex)).length()))
+                            .append(row.get(printIndex))
                             .append(" ]\n");
 
                     }
                     else {
 
-                        sb.append(StandardOutputUtil.getSpacesString(spacesToPrint))
-                            .append(row.get(i))
+                        sb.append(StandardOutputUtil.getLeadingSpaces(
+                                    numberOfDigitsInLongestNumber,
+                                    String.valueOf(row.get(printIndex)).length()))
+                            .append(row.get(printIndex))
                             .append(", ");
 
                     }
@@ -170,7 +172,5 @@ public class Matrix {
         }
         return sb.toString();
     }
-
-
 
 }
