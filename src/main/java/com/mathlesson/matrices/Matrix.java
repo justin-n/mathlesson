@@ -1,5 +1,7 @@
 package com.mathlesson.matrices;
 
+import com.mathlesson.util.StandardOutputUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +12,8 @@ public class Matrix {
     private List<List<Integer>> rows;
 
     Matrix() {
+        width = 0;
+        height = 0;
         rows = new ArrayList<>();
     }
 
@@ -74,8 +78,10 @@ public class Matrix {
 
             if (row.size() == 1) {
                 sb.append("[ ")
-                    .append(getNumberOfPaddingSpacesNeeded(
-                        getNumberOfDigitsInLongestNumber(), row.get(0)))
+                    .append(StandardOutputUtil.getLeadingSpaces(
+                            getNumberOfDigitsInLongestNumber(),
+                            String.valueOf(row.get(0)).length()))
+                    .append(row.get(0))
                     .append(" ]");
             }
             else {
@@ -83,13 +89,17 @@ public class Matrix {
 
                 for (int columnIndex = 0; columnIndex < row.size(); columnIndex++) {
                     if (columnIndex == row.size() - 1) {
-                        sb.append(getNumberOfPaddingSpacesNeeded(
-                                getNumberOfDigitsInLongestNumber(), row.get(columnIndex)))
+                        sb.append(StandardOutputUtil.getLeadingSpaces(
+                                    getNumberOfDigitsInLongestNumber(),
+                                    String.valueOf(row.get(columnIndex)).length()))
+                            .append(row.get(columnIndex))
                             .append(" ]");
                     }
                     else {
-                        sb.append(getNumberOfPaddingSpacesNeeded(
-                                getNumberOfDigitsInLongestNumber(), row.get(columnIndex)))
+                        sb.append(StandardOutputUtil.getLeadingSpaces(
+                                    getNumberOfDigitsInLongestNumber(),
+                                    String.valueOf(row.get(columnIndex)).length()))
+                            .append(row.get(columnIndex))
                             .append(", ");
                     }
                 }
@@ -115,11 +125,11 @@ public class Matrix {
             if (width == 1) {
                 for (Integer item : row) {
                     int spacesToPrint
-                        = getNumberOfPaddingSpacesNeeded(
+                        = StandardOutputUtil.getNumberOfPaddingSpacesNeeded(
                             numberOfDigitsInLongestNumber, String.valueOf(item).length());
 
                     sb.append("[ ")
-                        .append(getSpacesString(spacesToPrint))
+                        .append(StandardOutputUtil.getSpacesString(spacesToPrint))
                         .append(item)
                         .append(" ]\n");
                 }
@@ -130,27 +140,27 @@ public class Matrix {
                 for (int i = 0; i < row.size(); i++) {
 
                     int spacesToPrint
-                        = getNumberOfPaddingSpacesNeeded(
-                        numberOfDigitsInLongestNumber, String.valueOf(row.get(i)).length());
+                        = StandardOutputUtil.getNumberOfPaddingSpacesNeeded(
+                            numberOfDigitsInLongestNumber, String.valueOf(row.get(i)).length());
 
                     if (i == 0) {
 
                         sb.append("[ ")
-                            .append(getSpacesString(spacesToPrint))
+                            .append(StandardOutputUtil.getSpacesString(spacesToPrint))
                             .append(row.get(i))
                             .append(", ");
 
                     }
                     else if (i == (row.size() - 1)) {
 
-                        sb.append(getSpacesString(spacesToPrint))
+                        sb.append(StandardOutputUtil.getSpacesString(spacesToPrint))
                             .append(row.get(i))
                             .append(" ]\n");
 
                     }
                     else {
 
-                        sb.append(getSpacesString(spacesToPrint))
+                        sb.append(StandardOutputUtil.getSpacesString(spacesToPrint))
                             .append(row.get(i))
                             .append(", ");
 
@@ -161,38 +171,6 @@ public class Matrix {
         return sb.toString();
     }
 
-    private int getNumberOfPaddingSpacesNeeded(int numberOfDigitsInLongestNumber, int numberOfDigitsInCurrentNumber) {
-        return (numberOfDigitsInLongestNumber - numberOfDigitsInCurrentNumber);
-    }
 
-    private String getSpacesString(int spacesToPrint) {
-        switch (spacesToPrint) {
-            case 0:
-                return "";
-            case 1:
-                return " ";
-            case 2:
-                return "  ";
-            case 3:
-                return "   ";
-            case 4:
-                return "    ";
-            case 5:
-                return "     ";
-            case 6:
-                return "      ";
-            case 7:
-                return "       ";
-            case 8:
-                return "        ";
-            case 9:
-                return "         ";
-            case 10:
-                return "          ";
-            default:
-                throw new RuntimeException("Attempted to return a space string of " + spacesToPrint +
-                    " length, which means there is an item in the matrix that has a longer digit width than" +
-                    " the digit width this program supports");
-        }
-    }
+
 }

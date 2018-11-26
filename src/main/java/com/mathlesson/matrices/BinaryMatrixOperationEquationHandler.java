@@ -1,5 +1,7 @@
 package com.mathlesson.matrices;
 
+import com.mathlesson.util.StandardOutputUtil;
+
 public class BinaryMatrixOperationEquationHandler {
 
     private Matrix firstMatrix;
@@ -37,11 +39,6 @@ public class BinaryMatrixOperationEquationHandler {
     }
 
     public void printOperands() {
-        int numberOfDigitsInLongestNumberInFirstMatrix =
-            firstMatrix.getNumberOfDigitsInLongestNumber();
-
-        int numberOfDigitsInLongestNumberInSecondMatrix =
-            secondMatrix.getNumberOfDigitsInLongestNumber();
 
         int firstMatrixHeight = firstMatrix.getHeight();
         int secondMatrixHeight = secondMatrix.getHeight();
@@ -51,6 +48,33 @@ public class BinaryMatrixOperationEquationHandler {
 
         StringBuilder sb = new StringBuilder();
 
+        int widthOfFirstMatrixRowString = firstMatrix.getFormattedRowStringByIndex(0).length();
 
+        for (int printIndex = 0; printIndex < heightOfHighestMatrix || printIndex == 0; printIndex++) {
+
+            if (printIndex == 0) {
+                sb.append(firstMatrix.getFormattedRowStringByIndex(printIndex));
+                sb.append(" ");
+                sb.append(secondMatrix.getFormattedRowStringByIndex(printIndex));
+                sb.append("\n");
+            }
+            else {
+                if (printIndex < firstMatrixHeight) {
+                    sb.append(firstMatrix.getFormattedRowStringByIndex(printIndex));
+                    sb.append(" ");
+                }
+                else {
+                    sb.append(StandardOutputUtil.getSpacesString(widthOfFirstMatrixRowString + 1));
+                }
+                if (printIndex < secondMatrixHeight) {
+                    sb.append(secondMatrix.getFormattedRowStringByIndex(printIndex));
+                    sb.append("\n");
+                }
+                else {
+                    sb.append("\n");
+                }
+            }
+        }
+        System.out.print(sb.toString());
     }
 }

@@ -57,6 +57,9 @@ public class InteractiveMatrixDirector {
                 System.out.println("Second matrix in operation order: ");
                 System.out.println(bmoeh.getSecondMatrix());
             }
+            else if (mainMenuChoice == 5) {
+                bmoeh.printOperands();
+            }
         }
     }
 
