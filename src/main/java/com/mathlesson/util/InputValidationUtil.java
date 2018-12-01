@@ -39,11 +39,11 @@ public class InputValidationUtil {
         return true;
     }
 
-    public static boolean stringContainsSpaces(String input) {
+    private static boolean stringContainsSpaces(String input) {
         return input.split(" ").length > 1;
     }
 
-    public static boolean stringContainsOnlyNumbers(String input) {
+    private static boolean stringContainsOnlyNumbers(String input) {
         for (char c : input.toCharArray()) {
             if (!charIsADigit(c)) {
                 return false;
@@ -52,7 +52,7 @@ public class InputValidationUtil {
         return true;
     }
 
-    public static boolean stringContainsOnlyNumbersAndCommas(String input) {
+    private static boolean stringContainsOnlyNumbersAndCommas(String input) {
         for (char c : input.toCharArray()) {
             if (!charIsADigit(c) && (c != ',')) {
                 return false;
@@ -61,7 +61,7 @@ public class InputValidationUtil {
         return true;
     }
     
-    public static boolean stringContainsConsecutiveCommas(String input) {
+    private static boolean stringContainsConsecutiveCommas(String input) {
 
         char[] inputCharArr = input.toCharArray();
         
@@ -76,7 +76,7 @@ public class InputValidationUtil {
         return false;
     }
     
-    public static boolean stringContainsSpacesBetweenNumbers(String input) {
+    private static boolean stringContainsSpacesBetweenNumbers(String input) {
         
         char[] inputCharArr = input.toCharArray();
         

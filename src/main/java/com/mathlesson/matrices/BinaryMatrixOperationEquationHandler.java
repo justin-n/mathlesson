@@ -38,6 +38,10 @@ public class BinaryMatrixOperationEquationHandler {
         this.resultMatrix = resultMatrix;
     }
 
+    public Matrix addOperands() {
+        return firstMatrix.addToMatrix(secondMatrix);
+    }
+
     public void printOperands() {
 
         int firstMatrixHeight = firstMatrix.getHeight();

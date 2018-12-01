@@ -13,7 +13,7 @@ public class InteractiveMatrixDirector {
 
     private static final String CURSOR = ">> ";
 
-    public static void runInterpreter() throws IOException {
+    public static void runSimpleMenuInterpreter() throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -83,7 +83,7 @@ public class InteractiveMatrixDirector {
             .map(Integer::parseInt)
             .collect(Collectors.toList());
 
-        matrix.addRow(rowInts);
+        matrix.insertRow(rowInts);
     }
 
 }

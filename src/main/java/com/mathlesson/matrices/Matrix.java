@@ -33,7 +33,7 @@ public class Matrix {
         return rows.get(index);
     }
 
-    public void addRow(List<Integer> row) {
+    public void insertRow(List<Integer> row) {
         if (rows.size() == 0) {
             rows.add(row);
             width = row.size();
@@ -48,6 +48,16 @@ public class Matrix {
                 height++;
             }
         }
+    }
+
+    public Matrix addToMatrix(Matrix otherMatrix) {
+        Matrix sum = new Matrix();
+
+        for (int x = 0; x < width; x++) {
+            sum.insertRow(MatrixOperationUtil.addRowsTogether(rows.get(x), otherMatrix.getRowByIndex(x)));
+        }
+
+        return sum;
     }
 
     private int getNumberOfDigitsInLongestNumber() {
