@@ -53,7 +53,7 @@ public class Matrix {
     public Matrix addToMatrix(Matrix otherMatrix) {
         Matrix sum = new Matrix();
 
-        for (int x = 0; x < width; x++) {
+        for (int x = 0; x < height; x++) {
             sum.insertRow(MatrixOperationUtil.addRowsTogether(rows.get(x), otherMatrix.getRowByIndex(x)));
         }
 

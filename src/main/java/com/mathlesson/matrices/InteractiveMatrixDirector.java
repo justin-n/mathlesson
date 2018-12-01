@@ -23,14 +23,15 @@ public class InteractiveMatrixDirector {
         int mainMenuChoice = 0;
 
         try {
-            while (mainMenuChoice != 6) {
+            while (mainMenuChoice != 7) {
                 System.out.println();
                 System.out.println("\t1. Add row to first matrix in operation order");
                 System.out.println("\t2. Add row to second matrix in operation order");
                 System.out.println("\t3. View first matrix in operation order");
                 System.out.println("\t4. View second matrix in operation order");
                 System.out.println("\t5. View both matrix operands");
-                System.out.println("\t6. Exit");
+                System.out.println("\t6. View Sum of both matrices");
+                System.out.println("\t7. Exit");
                 System.out.println();
                 System.out.print(CURSOR);
 
@@ -60,6 +61,9 @@ public class InteractiveMatrixDirector {
                 }
                 else if (mainMenuChoice == 5) {
                     bmoeh.printOperands();
+                }
+                else if (mainMenuChoice == 6) {
+                    System.out.println(bmoeh.addOperands());
                 }
             }
         } catch (IOException e) {
